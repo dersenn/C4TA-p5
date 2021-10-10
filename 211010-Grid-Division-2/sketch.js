@@ -28,7 +28,6 @@ function makeGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, max
                 if (initLevel < maxLevel) {
                     if (coinToss(50)) {
                         myTiles.push( new Tile(xOff, yOff, tileW, tileH))
-                        // cells.push(new GridObject(x * elW, y * elH, elW, elH, c, v, a))
                     } else {
                         makeGrid(xOff, yOff, gridCols, gridRows, tileW, tileH, initLevel+1, maxLevel, myTiles)
                     }
@@ -47,10 +46,12 @@ function setup() {
 
     //actual code starts here
     // background('rgba(0, 255, 0, 1)')
+    rectMode(CENTER)
 
-    let cols = int(random(1,4))
-    let rows = int(random(1,4))
-    console.log(cols,rows)
+    // let rndcolsrows = int(random(2,4))
+    let cols = 2
+    let rows = cols
+    // console.log(cols,rows)
 
     let circleTiles = makeGrid(0,0, cols, rows, canW, canH, 0, 2, [])
     // console.log(circleTiles)
