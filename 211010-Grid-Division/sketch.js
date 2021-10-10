@@ -7,7 +7,6 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
-
 function coinToss(chance) {
     if (random() < chance / 100) {
         return true
@@ -47,15 +46,18 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
+    // background('rgba(0, 255, 0, 1)')
 
-    background('rgba(0, 255, 0, 1)')
+    let cols = int(random(1,4))
+    let rows = int(random(1,4))
+    console.log(cols,rows)
 
-    let circleTiles = makeGrid(0,0, 2, 2, canW, canH, 0, 2, [])
-    console.log(circleTiles)
+    let circleTiles = makeGrid(0,0, cols, rows, canW, canH, 0, 2, [])
+    // console.log(circleTiles)
 
     for (var tile = 0; tile < circleTiles.length; tile++) {
         circleTiles[tile].draw()
-        console.log('drawing tile')
+        // console.log('drawing tile')
     }
 }
 

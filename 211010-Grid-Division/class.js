@@ -6,9 +6,15 @@ class Tile {
         this.h = tH
         this.cX = this.x + this.w/2
         this.cY = this.y + this.h/2
+
+        this.fgCol = random(255)
+        this.bgCol = 255 - this.fgCol
     }
     draw() {
-        fill('rgba(0, 0, 0, 1)')
+        noStroke()
+        fill(this.bgCol)
+        rect(this.x,this.y,this.w,this.h)
+        fill(this.fgCol)
         ellipse(this.cX,this.cY,this.w,this.h)
     }
 }
