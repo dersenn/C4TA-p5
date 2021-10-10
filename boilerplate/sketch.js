@@ -1,7 +1,6 @@
-/* some probably useful and often needed variables */
+// some probably useful and often needed variables
 const container = document.getElementById('p5-container')
 // make sure there is a #p5-container in index.html. 
-// efforts to create a fallback to body have failed so far
 
 let canW = container.offsetWidth //canvas Width
 let canH = container.offsetHeight //canvas Height
@@ -22,7 +21,7 @@ function draw() {
 
 }
 
-
+// doesn't always work
 function windowResized() {
     resizeCanvas(canW, canH)
     canW = container.offsetWidth
