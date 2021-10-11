@@ -13,7 +13,6 @@ let rows = cols
 
 
 
-
 function coinToss(chance) {
     if (random() < chance / 100) {
         return true
@@ -62,6 +61,8 @@ function setup() {
 }
 
 function draw() {
+
+    // what to do here???
     let containerPos = []
     let containerPosX = int(random(0, canW-canW/cols))
     let containerPosY = int(random(0, canH-canH/rows))
