@@ -49,7 +49,7 @@ function setup() {
     rectMode(CENTER)
 
     // let rndcolsrows = int(random(2,4))
-    let cols = 2
+    let cols = 3
     let rows = cols
     // console.log(cols,rows)
 
