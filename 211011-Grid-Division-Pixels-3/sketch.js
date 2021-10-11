@@ -62,8 +62,9 @@ function setup() {
 }
 
 function draw() {
-    let containerPosX = floor(random(0, canW-canW/cols, canW/cols))
-    let containerPosY = floor(random(0, canH-canH/rows, canH/rows))
+    let containerPos = []
+    let containerPosX = int(random(0, canW-canW/cols))
+    let containerPosY = int(random(0, canH-canH/rows))
     let container = new TileContainer(containerPosX,containerPosY,canW/cols,canH/cols)
     container.DrawContainer()
 }
