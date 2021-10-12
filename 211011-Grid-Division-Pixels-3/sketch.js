@@ -67,11 +67,11 @@ function draw() {
     let container = new TileContainer(containerPosX,containerPosY,canW/cols,canH/cols)
     container.DrawContainer()
 
-    // rectangle of minimum tileSize (rows ** maxLevel)
+    // rectangle of minimum tileSize (rows ** (maxLevel * rows)
     // why doesn't it paint?
     push()
-    fill(rgba(255,0,0,1))
-    rect(0,0,canW / cols ** 3, canH / rows ** 3)
+    fill(255,0,0)
+    rect(0,0,canW / cols ** (2*2), canH / rows ** (2*2))
     pop()
 
 }
