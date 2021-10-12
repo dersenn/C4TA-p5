@@ -12,7 +12,6 @@ let cols = 2
 let rows = cols
 
 
-
 function coinToss(chance) {
     if (random() < chance / 100) {
         return true
@@ -33,12 +32,12 @@ function makeGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, max
 
                 if (initLevel < maxLevel) {
                     if (coinToss(50)) {
-                        myTiles.push( new Tile(xOff, yOff, tileW, tileH))
+                        myTiles.push( new Tile(xOff, yOff, tileW, tileH) )
                     } else {
                         makeGrid(xOff, yOff, gridCols, gridRows, tileW, tileH, initLevel+1, maxLevel, myTiles)
                     }
                 } else {
-                    myTiles.push( new Tile(xOff, yOff, tileW, tileH))
+                    myTiles.push( new Tile(xOff, yOff, tileW, tileH) )
                 }
             }
     }
@@ -74,5 +73,8 @@ function draw() {
     rect(0,0,canW / cols ** (2*2), canH / rows ** (2*2))
     pop()
 
+
+
+    noLoop()
 }
 
