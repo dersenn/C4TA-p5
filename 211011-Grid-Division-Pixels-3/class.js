@@ -7,7 +7,7 @@ class Tile {
     }
 
     drawTile() {
-        // noStroke()
+        noStroke()
         if (coinToss(50)) {
             fill(255)
         } else {
@@ -34,7 +34,6 @@ class TileContainer {
     }
 
 }
-
 
 // use like so (in main app)
 // let v = new Xyz(something)

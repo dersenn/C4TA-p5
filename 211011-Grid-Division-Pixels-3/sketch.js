@@ -57,16 +57,22 @@ function setup() {
     for (var tile = 0; tile < circleTiles.length; tile++) {
         circleTiles[tile].drawTile()
     }
-
 }
 
 function draw() {
-
     // what to do here???
     let containerPos = []
     let containerPosX = int(random(0, canW-canW/cols))
     let containerPosY = int(random(0, canH-canH/rows))
     let container = new TileContainer(containerPosX,containerPosY,canW/cols,canH/cols)
     container.DrawContainer()
+
+    // rectangle of minimum tileSize (rows ** maxLevel)
+    // why doesn't it paint?
+    push()
+    fill(rgba(255,0,0,1))
+    rect(0,0,canW / cols ** 3, canH / rows ** 3)
+    pop()
+
 }
 
