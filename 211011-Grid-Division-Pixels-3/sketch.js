@@ -1,23 +1,30 @@
 // some probably useful and often needed variables
-const container = document.getElementById('p5-container')
+const p5container = document.getElementById('p5-container')
 // make sure there is a #p5-container in index.html. 
 
-let canW = container.offsetWidth //canvas Width
-let canH = container.offsetHeight //canvas Height
-let canMax = Math.max(canW, canH) //longer canvas side
-let canMin = Math.min(canW, canH) //shorter canvas side
-
+let canW = p5container.offsetWidth //canvas Width based on html container size
+let canH = p5container.offsetHeight //canvas Height based on html container size
+let canMax = Math.max(canW, canH) //longer canvas side (useful if not square)
+let canMin = Math.min(canW, canH) //shorter canvas side (useful if not square)
 
 let cols = 2
 let rows = cols
+let levels = 2
 
+let maxDivisionsX = cols ** (levels + 1)
+let maxDivisionsY = rows ** (levels + 1)
 
+let minTileW = canW / maxDivisionsX
+let minTileH = canH / maxDivisionsX
+
+// Random Function (chance = percentage, e.g. 50)
 function coinToss(chance) {
     if (random() < chance / 100) {
         return true
     }
 }
 
+// Recursive grid Generator
 function makeGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, maxLevel, arr) {
     let tileW = gridW / gridCols
     let tileH = gridH / gridRows
@@ -45,36 +52,35 @@ function makeGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, max
 }
 
 function setup() {
-    //initial setup of canvas and containing container (sic!)
+    // Setup Canvas and place it in container
     let canvas = createCanvas(canW,canH)
-    canvas.parent(container)
+    canvas.parent(p5container)
 
-    //actual code starts here
-    frameRate(5)
+    frameRate(2)
 
-    let circleTiles = makeGrid(0,0, cols, rows, canW, canH, 0, 2, [])
-    for (var tile = 0; tile < circleTiles.length; tile++) {
-        circleTiles[tile].drawTile()
+    // create the "background" Tiles
+    let bgTiles = makeGrid(0,0, cols, rows, canW, canH, 0, levels, [])
+    for (var tile = 0; tile < bgTiles.length; tile++) {
+        bgTiles[tile].drawTile()
     }
 }
 
 function draw() {
-    // what to do here???
-    let containerPos = []
-    let containerPosX = int(random(0, canW-canW/cols))
-    let containerPosY = int(random(0, canH-canH/rows))
+    // Currently only works for 2*2 grid...
+    // Also, the updating of the position should go into class and not happen in draw()
+    let containerPosX = int(random(0, maxDivisionsX/cols + 1)) * minTileW
+    let containerPosY = int(random(0, maxDivisionsY/rows + 1)) * minTileH
+
+    // Create the moving Tiles ()
     let container = new TileContainer(containerPosX,containerPosY,canW/cols,canH/cols)
-    container.DrawContainer()
+    container.drawContainer()
 
-    // rectangle of minimum tileSize (rows ** (maxLevel * rows)
-    // why doesn't it paint?
-    push()
-    fill(255,0,0)
-    rect(0,0,canW / cols ** (2*2), canH / rows ** (2*2))
-    pop()
+    // Show The Minimum Tile Size
+    // push()
+    // fill(255,0,0)
+    // rect(0, 0, minTileW, minTileH)
+    // pop()
 
-
-
-    noLoop()
+    // noLoop()
 }
 

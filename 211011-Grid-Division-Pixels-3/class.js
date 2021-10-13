@@ -7,7 +7,7 @@ class Tile {
     }
 
     drawTile() {
-        noStroke()
+        // noStroke()
         if (coinToss(50)) {
             fill(255)
         } else {
@@ -25,17 +25,11 @@ class TileContainer {
         this.h = conH
     }
 
-    DrawContainer() {
-        let circleTiles = makeGrid(this.x,this.y, cols, rows, this.w, this.h, 0, 2, [],)
+    drawContainer() {
+        let circleTiles = makeGrid(this.x,this.y, cols, rows, this.w, this.h, 0, levels, [],)
 
         for (var tile = 0; tile < circleTiles.length; tile++) {
             circleTiles[tile].drawTile()
         }
     }
-
 }
-
-// use like so (in main app)
-// let v = new Xyz(something)
-// v.classFunction()
-
