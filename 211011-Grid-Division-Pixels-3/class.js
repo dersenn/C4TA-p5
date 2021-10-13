@@ -1,18 +1,23 @@
 class Tile {
-    constructor(posX, posY, tW, tH) {
+    constructor(posX, posY, tW, tH, color) {
         this.x = posX
         this.y = posY
         this.w = tW
         this.h = tH
+        this.col = color
     }
 
     drawTile() {
-        // noStroke()
-        if (coinToss(50)) {
-            fill(255)
-        } else {
-            fill(0)
-        }
+        stroke(255)
+        noStroke()
+
+        // if (coinToss(50)) {
+        //     fill(255)
+        // } else {
+        //     fill(0)
+        // }
+
+        fill(this.col.r, this.col.g, this.col.b, 255)
         rect(this.x,this.y,this.w,this.h)
     }
 }
@@ -26,10 +31,10 @@ class TileContainer {
     }
 
     drawContainer() {
-        let circleTiles = makeGrid(this.x,this.y, cols, rows, this.w, this.h, 0, levels, [],)
+        let movingTiles = makeGrid(this.x,this.y, cols, rows, this.w, this.h, 0, levels, [])
 
-        for (var tile = 0; tile < circleTiles.length; tile++) {
-            circleTiles[tile].drawTile()
+        for (var tile = 0; tile < movingTiles.length; tile++) {
+            movingTiles[tile].drawTile()
         }
     }
 }

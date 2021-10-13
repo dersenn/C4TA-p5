@@ -17,6 +17,12 @@ let maxDivisionsY = rows ** (levels + 1)
 let minTileW = canW / maxDivisionsX
 let minTileH = canH / maxDivisionsX
 
+let colors = [
+    {r: 0, g: 0, b: 255},
+    {r: 0, g: 255, b: 0},
+    {r: 255, g: 0, b: 0}
+    ]
+
 // Random Function (chance = percentage, e.g. 50)
 function coinToss(chance) {
     if (random() < chance / 100) {
@@ -39,12 +45,12 @@ function makeGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, max
 
                 if (initLevel < maxLevel) {
                     if (coinToss(50)) {
-                        myTiles.push( new Tile(xOff, yOff, tileW, tileH) )
+                        myTiles.push( new Tile(xOff, yOff, tileW, tileH, random(colors)) )
                     } else {
                         makeGrid(xOff, yOff, gridCols, gridRows, tileW, tileH, initLevel+1, maxLevel, myTiles)
                     }
                 } else {
-                    myTiles.push( new Tile(xOff, yOff, tileW, tileH) )
+                    myTiles.push( new Tile(xOff, yOff, tileW, tileH, random(colors)) )
                 }
             }
     }
@@ -56,7 +62,8 @@ function setup() {
     let canvas = createCanvas(canW,canH)
     canvas.parent(p5container)
 
-    frameRate(2)
+    frameRate(3)
+    // blendMode(SCREEN)
 
     // create the "background" Tiles
     let bgTiles = makeGrid(0,0, cols, rows, canW, canH, 0, levels, [])
@@ -67,7 +74,7 @@ function setup() {
 
 function draw() {
     // Currently only works for 2*2 grid...
-    // Also, the updating of the position should go into class and not happen in draw()
+    // Also, the updating of the position should go into class and not happen randomly in draw()
     let containerPosX = int(random(0, maxDivisionsX/cols + 1)) * minTileW
     let containerPosY = int(random(0, maxDivisionsY/rows + 1)) * minTileH
 
