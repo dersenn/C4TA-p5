@@ -17,8 +17,6 @@ let r
 let prevX
 let prevY
 
-console.log(prevX,prevY)
-
 function setup() {
     //initial setup of canvas and containing container (sic!)
     let canvas = createCanvas(canW,canH)
