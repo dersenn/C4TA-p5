@@ -30,6 +30,7 @@ function setup() {
     aStep = aMax / nSteps
 }
 
+// some functions...
 function drawCircle(x,y,dia,color) {
     noStroke()
     if (monochrome) {
@@ -40,7 +41,7 @@ function drawCircle(x,y,dia,color) {
     ellipse(x,y,dia)
 }
 
-// p5 Setup
+// p5 Draw
 function draw() {
     translate(width/2,height/2)
     background(0,0,0)
