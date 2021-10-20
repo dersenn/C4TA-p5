@@ -20,7 +20,7 @@ let prevY
 console.log(prevX,prevY)
 
 function setup() {
-    //initial setup of canvas and containing container (sic!)
+    //initial setup of canvas and container
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
@@ -50,6 +50,6 @@ function draw() {
         prevX = pX
         prevY = pY
 
-        a += TAU / 36000
+        a += maxA / 36000
     }
 }

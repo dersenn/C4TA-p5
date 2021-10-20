@@ -8,12 +8,11 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 function setup() {
-    //initial setup of canvas and containing container (sic!)
+    //initial setup of canvas and container
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
     //actual code starts here
-
     background('rgba(0, 255, 0, 1)')    
 }
 
