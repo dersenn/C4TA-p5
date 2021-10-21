@@ -61,7 +61,6 @@ function draw() {
     drawCircle(cosX,0,d,{r: 0, g: 0, b: 128})
     drawCircle(-cosX,0,d,{r: 0, g: 0, b: 128})
 
-
     // green. up/down.
     drawCircle(0,sinY,d,{r: 0, g: 255, b: 0})
     drawCircle(0,-sinY,d,{r: 0, g: 255, b: 0})
@@ -69,7 +68,7 @@ function draw() {
     drawCircle(0,cosY,d,{r: 0, g: 128, b: 0})
     drawCircle(0,-cosY,d,{r: 0, g: 128, b: 0})
 
-    // red. circular
+    // red. circular.
     drawCircle(sinX,cosY,d,{r: 255, g: 0, b: 0})
     drawCircle(-sinX,cosY,d,{r: 255, g: 0, b: 0})
     drawCircle(sinX,-cosY,d,{r: 255, g: 0, b: 0})
@@ -80,20 +79,26 @@ function draw() {
     drawCircle(cosX,-sinY,d,{r: 128, g: 0, b: 0})
     drawCircle(-cosX,-sinY,d,{r: 128, g: 0, b: 0})
 
-    // yellow. diagonal, top left/bottom right
+    // yellow. diagonal, top left/bottom right.
     drawCircle(sinX,sinY,d,{r: 255, g: 255, b: 0})
     drawCircle(cosX,cosY,d,{r: 255, g: 255, b: 0})
 
     drawCircle(-sinX,-sinY,d,{r: 128, g: 128, b: 0})
     drawCircle(-cosX,-cosY,d,{r: 128, g: 128, b: 0})
 
-    // magenta. diagonal, bottom left/top right
+    // magenta. diagonal, bottom left/top right.
     drawCircle(cosX,-cosY,d,{r: 255, g: 0, b: 255})
     drawCircle(sinX,-sinY,d,{r: 255, g: 0, b: 255})
 
     drawCircle(-cosX,cosY,d,{r: 128, g: 0, b: 128})
     drawCircle(-sinX,sinY,d,{r: 128, g: 0, b: 128})
 
+    // spiral. weirdo. modify r as well. Not working yet.
+    push()
+        let sinR = map(sine,-1,1,0 + r, sine * (width/2 - r))
+        let cosR = map(cosine,-1,1,0 + r, cosine * (height/2 - r))
+        drawCircle(sinR, cosR,d,{r: random()*255, g: random()*255, b: random()*255})
+    pop()
 
     a += aStep
 }
