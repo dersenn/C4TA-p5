@@ -37,8 +37,13 @@ function draw() {
             prevX = sin(p * a) * r
             prevY = cos(p * a) * r
         }
-        pX = sin(p * a) * r
-        pY = cos(p * a) * r
+        // pX = sin(p * a) * r
+        // pY = cos(p * a) * r
+
+        pX = sin(a + p * a) * r
+        pY = cos(a + p * a) * r
+
+
         line(prevX,prevY,pX,pY)
         noFill()
         stroke(0,255,0)
@@ -50,4 +55,5 @@ function draw() {
 
         a += maxA / 36000
     }
+    // a += maxA / 36000
 }
