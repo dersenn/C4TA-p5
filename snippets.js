@@ -12,7 +12,6 @@ myArray.reverse() // Reverse Array
 // Shuffle Array (Fisher Yates Shuffle)
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // https://bost.ocks.org/mike/shuffle/
-
 function shuffleArray(array) {
   let currentIndex = array.length,  randomIndex;
   // While there remain elements to shuffle...
