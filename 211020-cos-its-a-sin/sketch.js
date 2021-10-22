@@ -32,7 +32,7 @@ function draw() {
     translate(width/2,height/2)
     background(255,255,255)
     for (let p = 0; p < nPoints; p++) {
-        r = random(250,250)
+        r = canMin/2 * .75
         if (prevX == undefined && prevY == undefined) {
             prevX = sin(p * a) * r
             prevY = cos(p * a) * r
