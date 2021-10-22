@@ -1,40 +1,44 @@
 class Tile {
-    constructor(posX, posY, tW, tH, color) {
-        this.x = posX
-        this.y = posY
-        this.w = tW
-        this.h = tH
-        this.col = color
-    }
-
-    drawTile() {
-        stroke(255)
-        noStroke()
-
-        // if (coinToss(50)) {
-        //     fill(255)
-        // } else {
-        //     fill(0)
-        // }
-
-        fill(this.col.r, this.col.g, this.col.b, 255)
-        rect(this.x,this.y,this.w,this.h)
-    }
-}
-
-class TileContainer {
-    constructor(posX, posY, conW, conH) {
-        this.x = posX
-        this.y = posY
-        this.w = conW
-        this.h = conH
-    }
-
-    drawContainer() {
-        let movingTiles = makeGrid(this.x,this.y, cols, rows, this.w, this.h, 0, levels, [])
-
-        for (var tile = 0; tile < movingTiles.length; tile++) {
-            movingTiles[tile].drawTile()
+    constructor(x,y,w,h,col) {
+        this.x = x
+        this.y = y
+        this.w = w
+        this.h = h
+        this.col = col
+        if (this.h > this.w) {
+            this.isportrait = true
+            this.dia = this.w
+        } else {
+            this.dia = this.h
         }
+        this.r = this.dia / 2
+
+        if (monochrome) {
+            let rndCol = random() * 255
+            this.fgCol = {r: 255-rndCol, g: 255-rndCol, b: 255-rndCol}
+            this.bgCol = {r: rndCol, g: rndCol, b:rndCol}
+        } else {
+            this.fgCol = {r: 255, g: 255, b: 255}
+            this.bgCol = {r: this.col.r, g: this.col.g, b: this.col.b}
+        }
+
+        this.a = random() * TAU
+    }
+    Draw() {
+        noStroke()
+        fill(this.bgCol.r,this.bgCol.g,this.bgCol.b)
+        rect(this.x,this.y,this.w,this.h)
+
+        if (this.isportrait) {
+            this.cX = this.x + this.r
+            this.cY = map(cos(this.a),-1,1,this.y + this.r, this.y + this.h - this.r)
+        } else {
+            this.cX = map(sin(this.a),-1,1,this.x + this.r,this.x + this.w - this.r)
+            this.cY = this.y + this.r
+        }
+
+        fill(this.fgCol.r,this.fgCol.g,this.fgCol.b)
+        ellipse(this.cX, this.cY,this.dia)
+        this.a += .05
     }
 }
