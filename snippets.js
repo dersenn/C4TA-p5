@@ -26,5 +26,8 @@ function shuffleArray(array) {
   return array;
 }
 
-//endless array loop
-
+//infinite array loop
+let array = ['a','b','c','d']
+for ( let i = 0; i < array.length; i = (i+1) % array.length) {
+  console.log(array[i])
+}
