@@ -11,45 +11,70 @@ let canMin = Math.min(canW, canH) //shorter canvas side
 
 
 let positions = []
+let steps = 60
 
 // p5 Setup
 function setup() {
     //initial setup of canvas and container
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
-    frameRate(4)
+    frameRate(30)
     //actual code starts here
     const rad = canMin/2 * .75
-    for (let a = 0; a < TAU; a += TAU/12) {
+    for (let a = 0; a < TAU; a += TAU/steps) {
         let newX = cos(a) * rad
         let newY = sin(a) * rad
         positions.push({x: newX, y: newY})
     }
 }
 
-let specialIndex = 0
-
 // p5 Draw
 function draw() {
-    let now = new Date()
-    console.log(now)
-
     translate(width/2,height/2)
     rotate(-HALF_PI)
     background(255)
 
+    let now = new Date()
+    let time = {
+        hour: now.getHours(),
+        min: now.getMinutes(),
+        sec: now.getSeconds(),
+    }
+    // console.log(time.hour,time.min,time.sec)
+
     for (let i = 0; i < positions.length; i++) {
         let x = positions[i].x
         let y = positions[i].y
+        if (i % 5 == 0) {
+            fill(0)
+        } else {
+            fill(255)
+        }
         ellipse(x,y,10)
     }
 
+    // hours hand
     push()
-    // noFill()
-    let specialPosition = positions[specialIndex]
-    ellipse(specialPosition.x, specialPosition.y, 30)
+    stroke(0,255,0)
+    strokeWeight(12)
+    let hourPosition = positions[time.hour % 12 * 5]
+    line(0,0,hourPosition.x, hourPosition.y)
+    // ellipse(hourPosition.x, hourPosition.y, 30)
     pop()
-    
-    // use modulo to reset index to zero at last position
-    specialIndex = (specialIndex + 1) % positions.length
+
+    // minutes hand
+    push()
+    stroke(0,0,255)
+    strokeWeight(12)
+    let minPosition = positions[time.min]
+    line(0,0,minPosition.x, minPosition.y)
+    pop()
+
+    // seconds hand
+    push()
+    noStroke()
+    fill(255,0,0)
+    let secPosition = positions[time.sec]
+    ellipse(secPosition.x, secPosition.y, 30)
+    pop()
 }
