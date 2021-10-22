@@ -5,13 +5,13 @@ class Particle {
 
         this.size = 30
         this.history = []
-        this.memory = 30
+        this.memory = 60
         this.sizeStep = this.size / this.memory
     }
     Draw() {
         this.x = mouseX
         this.y = mouseY
-        ellipse(this.x,this.y,30)
+        // ellipse(this.x,this.y,30)
 
         let v = createVector(this.x,this.y)
         this.history.push(v)
