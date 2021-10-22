@@ -11,3 +11,5 @@
 - ['Cos it's a Sin 2 — All together Now!](https://dersenn.github.io/C4TA-p5/211020-cos-its-a-sin-2/)
 - [Clock — very simple](https://dersenn.github.io/C4TA-p5/211022-clock/)
 - [Trails - history array](https://dersenn.github.io/C4TA-p5/211022-trails/)
+- ['Cos it's a Sin 4 — Study for grid Switches](https://dersenn.github.io/C4TA-p5/211022-cos-its-a-sin-4/)
+- [Grid Switches](https://dersenn.github.io/C4TA-p5/211022-Grid-Division-Switches/)
