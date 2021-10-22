@@ -31,14 +31,19 @@ let specialIndex = 0
 
 // p5 Draw
 function draw() {
+    let now = new Date()
+    console.log(now)
+
     translate(width/2,height/2)
     rotate(-HALF_PI)
     background(255)
+
     for (let i = 0; i < positions.length; i++) {
         let x = positions[i].x
         let y = positions[i].y
         ellipse(x,y,10)
     }
+
     push()
     // noFill()
     let specialPosition = positions[specialIndex]
