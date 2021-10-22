@@ -21,7 +21,6 @@ class Tile {
             this.fgCol = {r: 255, g: 255, b: 255}
             this.bgCol = {r: this.col.r, g: this.col.g, b: this.col.b}
         }
-
         this.a = random() * TAU
     }
     Draw() {
