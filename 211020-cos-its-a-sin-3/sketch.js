@@ -25,7 +25,6 @@ function setup() {
         let newY = sin(a) * rad
         positions.push({x: newX, y: newY})
     }
-    console.log(positions)
 }
 
 let specialIndex = 0
@@ -41,9 +40,11 @@ function draw() {
         ellipse(x,y,10)
     }
     push()
-    noFill()
+    // noFill()
     let specialPosition = positions[specialIndex]
     ellipse(specialPosition.x, specialPosition.y, 30)
     pop()
+    
+    // use modulo to reset index to zero at last position
     specialIndex = (specialIndex + 1) % positions.length
 }
