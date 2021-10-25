@@ -33,25 +33,48 @@ function setup() {
 function draw() {
     background(255)
     translate(width/2,height/2)
+    rotate(PI)
 
     let now = new Date()
     let time = {
         hour: now.getHours(),
         min: now.getMinutes(),
         sec: now.getSeconds(),
-        msec: now.getMilliseconds(),
+        msec: now.getMilliseconds()
     }
 
-    stroke(0)
     strokeWeight(9)
 
-    let aSec = time.sec * PI / 60
+    // aSec = 0
     let center = createVector(0,0)
+    stroke(0)
     point(center)
 
+    let aMin = -time.min * TAU / 60
+    let pMin = createVector(sin(aMin) * width/2,cos(aMin) * height/2)
+    point(pMin)
+
+    let aSec = -time.sec * TAU / 60
+    // let pSec = createVector(sin(aSec) * width/2,cos(aSec) * height/2)
+
+    let xSec
+    let ySec
+    if ((aSec < -QUARTER_PI && aSec > -3 * QUARTER_PI) || (aSec < -5 * QUARTER_PI) && (aSec > -7 * QUARTER_PI)) {
+        xSec = width/2 
+        ySec = (width/2 * tan(aSec))
+        stroke(0,255,0)
+    } else {
+        stroke(0)
+        xSec = 0
+        ySec = 0
+    }
+    // let pSec = createVector(xSec, ySec)
     let pSec = createVector(sin(aSec) * width/2,cos(aSec) * height/2)
     point(pSec)
 
-
+    console.log('aMin: '+aMin+', aSec: '+aSec)
 
 }
+
+       // 1 and 3           (X0,Y0)      (X0 + a/2 , (a/2 * Tan(φ))+ Y0
+       // 2 and 4           (X0,Y0)      (X0 + b/(2* Tan(φ)) , b/2 + Y0)

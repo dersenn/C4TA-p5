@@ -9,7 +9,7 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
-let hoursMax = {n: 24, rows: 2}
+let hoursMax = {n: 12, rows: 2}
 let minsMax = {n: 60, rows: 1}
 let secsMax = {n: 60, rows: 1}
 let hsecsMax = {n: 100, rows: 1}
@@ -25,26 +25,20 @@ function recursiveGrid(zeroX, zeroY, grid, gridW, gridH, initLevel, maxLevel, cu
     this.time = curTime
     this.index = 0
 
-    this.grid = grid
-    console.log(this.grid)
+    // console.log(grid.n, grid.rows)
 
 
-    this.level = initLevel
 
-    // if (initLevel % 2 == 0) {
-    //     this.cols = this.grid.rows
-    //     this.rows = this.grid.n
-    // } else {
-    //     this.cols = this.grid.n
-    //     this.rows = this.grid.rows
-    // }
-
-    this.cols = this.grid.n
-    this.cols = this.grid.rows
+    if (initLevel % 2 == 0) {
+        this.cols = grid.rows
+        this.rows = grid.n
+    } else {
+        this.cols = grid.n
+        this.rows = grid.rows
+    }
 
     let tileW = gridW / this.cols
     let tileH = gridH / this.rows
-
 
     for (let x = 0; x < this.cols; x++) {
         let xOff = zeroX + (x * tileW)
@@ -52,10 +46,10 @@ function recursiveGrid(zeroX, zeroY, grid, gridW, gridH, initLevel, maxLevel, cu
             for (let y = 0; y < this.rows; y++) {
                 let yOff = zeroY + (y * tileH)
 
-                if (this.time[this.level] == this.index) { 
-                    recursiveGrid(xOff, yOff, clockIntervals[this.level+1], tileW, tileH, this.level+1, maxLevel, this.time, myTiles)
+                if ((initLevel < maxLevel) && (this.time[initLevel] == this.index)) { 
+                    recursiveGrid(xOff, yOff, clockIntervals[initLevel+1], tileW, tileH, initLevel+1, maxLevel, this.time, myTiles)
                 } else { 
-                    myTiles.push( new Tile(xOff, yOff, tileW, tileH, 255/this.level) ) 
+                    myTiles.push( new Tile(xOff, yOff, tileW, tileH, 255/initLevel, initLevel, this.index) ) 
                 }
 
                 this.index++
@@ -84,17 +78,32 @@ function setup() {
     ]
 
     stroke(240)
-    clockGrid = recursiveGrid(0,0,clockIntervals[0],width,height,0,clockIntervals.length,time,clockGrid)
+    clockGrid = recursiveGrid(0,0,clockIntervals[0],width,height,0,clockIntervals.length-1,time,clockGrid)
 
     console.log(time, clockGrid)
 
     for (let t = 0; t < clockGrid.length; t++) {
-        clockGrid[t].draw()
+        clockGrid[t].draw(time)
     }
 
 }
 
 // p5 Draw
 function draw() {
+    background(255)
 
+    let now = new Date()
+    let time = [
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
+    ]
+
+    stroke(240)
+    clockGrid = recursiveGrid(0,0,clockIntervals[0],width,height,0,clockIntervals.length-1,time,clockGrid)
+
+    for (let t = 0; t < clockGrid.length; t++) {
+        clockGrid[t].draw(time, clockIntervals)
+    }
 }
