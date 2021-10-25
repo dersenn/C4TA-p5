@@ -10,8 +10,21 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 
-let positions = []
 let steps = 60
+
+let hoursMax = 24
+let minsMax = 60
+let secsMax = 60
+let hsecsMax = 100
+
+let nGrids = 4
+
+let clockGrid = []
+
+let hoursGrid = []
+let minsGrid = []
+let secsGrid = []
+let hsecsGrid = []
 
 // p5 Setup
 function setup() {
@@ -20,18 +33,15 @@ function setup() {
     canvas.parent(container)
     frameRate(30)
     //actual code starts here
-    const rad = canMin/2 * .75
-    for (let a = 0; a < TAU; a += TAU/steps) {
-        let newX = cos(a) * rad
-        let newY = sin(a) * rad
-        positions.push({x: newX, y: newY})
-    }
+
+    hoursGrid = simpleGrid(0,0,hoursMax,1,width,height/nGrids,hoursGrid)
+    minsGrid = simpleGrid(0,height/nGrids,minsMax,1,width,height/nGrids,minsGrid)
+    secsGrid = simpleGrid(0,2 * height/nGrids,secsMax,1,width,height/nGrids,secsGrid)
+    hsecsGrid = simpleGrid(0,3 * height/nGrids,hsecsMax,1,width,height/nGrids,hsecsGrid)
 }
 
 // p5 Draw
 function draw() {
-    translate(width/2,height/2)
-    rotate(-HALF_PI)
     background(255)
 
     let now = new Date()
@@ -39,42 +49,26 @@ function draw() {
         hour: now.getHours(),
         min: now.getMinutes(),
         sec: now.getSeconds(),
-    }
-    // console.log(time.hour,time.min,time.sec)
-
-    for (let i = 0; i < positions.length; i++) {
-        let x = positions[i].x
-        let y = positions[i].y
-        if (i % 5 == 0) {
-            fill(0)
-        } else {
-            fill(255)
-        }
-        ellipse(x,y,10)
+        msec: now.getMilliseconds(),
     }
 
-    // hours hand
-    push()
-    stroke(0,255,0)
-    strokeWeight(12)
-    let hourPosition = positions[time.hour % 12 * 5]
-    line(0,0,hourPosition.x, hourPosition.y)
-    // ellipse(hourPosition.x, hourPosition.y, 30)
-    pop()
+    stroke(255)
 
-    // minutes hand
-    push()
-    stroke(0,0,255)
-    strokeWeight(12)
-    let minPosition = positions[time.min]
-    line(0,0,minPosition.x, minPosition.y)
-    pop()
+    for (let h = 0; h < hoursGrid.length; h++) {
+        hoursGrid[h].drawHours(h, time.hour)
+    }
 
-    // seconds hand
-    push()
-    noStroke()
-    fill(255,0,0)
-    let secPosition = positions[time.sec]
-    ellipse(secPosition.x, secPosition.y, 30)
-    pop()
+    for (let m = 0; m < minsGrid.length; m++) {
+        minsGrid[m].drawMins(m, time.min)
+    }
+
+    for (let s = 0; s < secsGrid.length; s++) {
+        secsGrid[s].drawSecs(s, time.sec)
+    }
+
+    for (let hs = 0; hs < hsecsGrid.length; hs++) {
+        hsecsGrid[hs].drawMilSecs(hs, time.msec)
+    }
+
+    // console.log(time.hour, time.min, time.sec, time.ms)
 }
