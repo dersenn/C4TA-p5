@@ -31,7 +31,7 @@ function setup() {
     //initial setup of canvas and container
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
-    frameRate(30)
+    frameRate(60)
     //actual code starts here
 
     hoursGrid = simpleGrid(0,0,hoursMax,1,width,height/nGrids,hoursGrid)
@@ -52,7 +52,7 @@ function draw() {
         msec: now.getMilliseconds(),
     }
 
-    stroke(255)
+    stroke(240)
 
     for (let h = 0; h < hoursGrid.length; h++) {
         hoursGrid[h].drawHours(h, time.hour)
