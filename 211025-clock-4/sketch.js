@@ -27,8 +27,6 @@ function recursiveGrid(zeroX, zeroY, grid, gridW, gridH, initLevel, maxLevel, cu
 
     // console.log(grid.n, grid.rows)
 
-
-
     if (initLevel % 2 == 0) {
         this.cols = grid.rows
         this.rows = grid.n
@@ -80,7 +78,7 @@ function setup() {
     stroke(240)
     clockGrid = recursiveGrid(0,0,clockIntervals[0],width,height,0,clockIntervals.length-1,time,clockGrid)
 
-    console.log(time, clockGrid)
+    // console.log(time, clockGrid)
 
     for (let t = 0; t < clockGrid.length; t++) {
         clockGrid[t].draw(time)
