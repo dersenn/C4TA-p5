@@ -42,33 +42,6 @@ function simpleGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, arr) {
     return myTiles
 }
 
-// Recursive Grid Generator
-function recursiveGrid(zeroX, zeroY, gridCols, gridRows, gridW, gridH, initLevel, maxLevel, arr) {
-    let tileW = gridW / gridCols
-    let tileH = gridH / gridRows
-
-    let myTiles = arr
-
-    for (let x = 0; x < gridCols; x++) {
-        let xOff = zeroX + (x * tileW)
-
-            for (let y = 0; y < gridRows; y++) {
-                let yOff = zeroY + (y * tileH)
-
-                if (initLevel < maxLevel) {
-                    if (coinToss(50)) {
-                        myTiles.push( new Tile(xOff, yOff, tileW, tileH))
-                    } else {
-                        recursiveGrid(xOff, yOff, gridCols, gridRows, tileW, tileH, initLevel+1, maxLevel, myTiles)
-                    }
-                } else {
-                    myTiles.push( new Tile(xOff, yOff, tileW, tileH))
-                }
-
-            }
-    }
-    return myTiles
-}
 
 // Shuffle Array (Fisher Yates Shuffle)
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array

@@ -21,6 +21,7 @@ function setup() {
 
     //actual code starts here
     thing = new Switch(0,0,canW,200,0)
+    
     for (let i = 0; i < 4; i++) {
         let step = width / 4
         things.push( new Switch(i * step,200,step,canH - 200,0))

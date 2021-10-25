@@ -10,8 +10,6 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 
-let steps = 60
-
 let hoursMax = 24
 let minsMax = 60
 let secsMax = 60

@@ -9,22 +9,61 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
+let hoursMax = {n: 24, rows: 2}
+let minsMax = {n: 60, rows: 1}
+let secsMax = {n: 60, rows: 1}
+let hsecsMax = {n: 100, rows: 1}
 
-let steps = 60
-
-let hoursMax = 24
-let minsMax = 60
-let secsMax = 60
-let hsecsMax = 100
-
-let nGrids = 4
+let clockIntervals = [hoursMax,minsMax,secsMax]
 
 let clockGrid = []
 
-let hoursGrid = []
-let minsGrid = []
-let secsGrid = []
-let hsecsGrid = []
+// Recursive Grid Generator
+function recursiveGrid(zeroX, zeroY, grid, gridW, gridH, initLevel, maxLevel, curTime, arr) {
+    let myTiles = arr
+
+    this.time = curTime
+    this.index = 0
+
+    this.grid = grid
+    console.log(this.grid)
+
+
+    this.level = initLevel
+
+    // if (initLevel % 2 == 0) {
+    //     this.cols = this.grid.rows
+    //     this.rows = this.grid.n
+    // } else {
+    //     this.cols = this.grid.n
+    //     this.rows = this.grid.rows
+    // }
+
+    this.cols = this.grid.n
+    this.cols = this.grid.rows
+
+    let tileW = gridW / this.cols
+    let tileH = gridH / this.rows
+
+
+    for (let x = 0; x < this.cols; x++) {
+        let xOff = zeroX + (x * tileW)
+
+            for (let y = 0; y < this.rows; y++) {
+                let yOff = zeroY + (y * tileH)
+
+                if (this.time[this.level] == this.index) { 
+                    recursiveGrid(xOff, yOff, clockIntervals[this.level+1], tileW, tileH, this.level+1, maxLevel, this.time, myTiles)
+                } else { 
+                    myTiles.push( new Tile(xOff, yOff, tileW, tileH, 255/this.level) ) 
+                }
+
+                this.index++
+
+            }
+    }
+    return myTiles
+}
 
 // p5 Setup
 function setup() {
@@ -34,41 +73,28 @@ function setup() {
     frameRate(60)
     //actual code starts here
 
-    hoursGrid = simpleGrid(0,0,hoursMax,1,width,height/nGrids,hoursGrid)
-    minsGrid = simpleGrid(0,height/nGrids,minsMax,1,width,height/nGrids,minsGrid)
-    secsGrid = simpleGrid(0,2 * height/nGrids,secsMax,1,width,height/nGrids,secsGrid)
-    hsecsGrid = simpleGrid(0,3 * height/nGrids,hsecsMax,1,width,height/nGrids,hsecsGrid)
+    background(255)
+
+    let now = new Date()
+    let time = [
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
+    ]
+
+    stroke(240)
+    clockGrid = recursiveGrid(0,0,clockIntervals[0],width,height,0,clockIntervals.length,time,clockGrid)
+
+    console.log(time, clockGrid)
+
+    for (let t = 0; t < clockGrid.length; t++) {
+        clockGrid[t].draw()
+    }
+
 }
 
 // p5 Draw
 function draw() {
-    background(255)
 
-    let now = new Date()
-    let time = {
-        hour: now.getHours(),
-        min: now.getMinutes(),
-        sec: now.getSeconds(),
-        msec: now.getMilliseconds(),
-    }
-
-    stroke(240)
-
-    for (let h = 0; h < hoursGrid.length; h++) {
-        hoursGrid[h].drawHours(h, time.hour)
-    }
-
-    for (let m = 0; m < minsGrid.length; m++) {
-        minsGrid[m].drawMins(m, time.min)
-    }
-
-    for (let s = 0; s < secsGrid.length; s++) {
-        secsGrid[s].drawSecs(s, time.sec)
-    }
-
-    for (let hs = 0; hs < hsecsGrid.length; hs++) {
-        hsecsGrid[hs].drawMilSecs(hs, time.msec)
-    }
-
-    // console.log(time.hour, time.min, time.sec, time.ms)
 }
