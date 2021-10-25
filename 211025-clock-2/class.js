@@ -18,7 +18,7 @@ class Tile {
         } else {
             this.a = 128
         }
-        if (this.i < hour) {
+        if (this.i <= hour) {
             fill(0,0,255,this.a)
         } else {
             fill(this.bgCol)
@@ -33,7 +33,7 @@ class Tile {
         } else {
             this.a = 128
         }
-        if (this.i < this.min) {
+        if (this.i <= this.min) {
             fill(0,255,0,this.a)
         } else {
             fill(this.bgCol)
@@ -48,7 +48,7 @@ class Tile {
         } else {
             this.a = 128
         }
-        if (this.i < this.sec) {
+        if (this.i <= this.sec) {
             fill(255,0,0,this.a)
         } else {
             fill(this.bgCol)
@@ -63,7 +63,7 @@ class Tile {
         } else {
             this.a = 128
         }
-        if (this.i < this.hsec) {
+        if (this.i <= this.hsec) {
             fill(255,255,0,this.a)
         } else {
             fill(this.bgCol)
