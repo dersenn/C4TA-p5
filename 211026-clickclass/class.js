@@ -31,6 +31,8 @@ class Node {
     drawNode() {
         fill(0)
         ellipse(this.x, this.y, this.dia)
+        this.checkPos()
+        this.updatePos()
     }
 
     drawNet(nodes) {

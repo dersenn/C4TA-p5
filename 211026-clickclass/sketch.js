@@ -31,8 +31,6 @@ function draw() {
     background(255)
     for (let n = 0; n < nodes.length; n++) {
         let node = nodes[n]
-        node.checkPos()
-        node.updatePos()
         node.drawNode()
         node.drawNet(nodes)
     }
