@@ -13,3 +13,6 @@
 - [Trails - history array](https://dersenn.github.io/C4TA-p5/211022-trails/)
 - ['Cos it's a Sin 4 — Study for grid Switches](https://dersenn.github.io/C4TA-p5/211022-cos-its-a-sin-4/)
 - [Grid Switches](https://dersenn.github.io/C4TA-p5/211022-Grid-Division-Switches/)
+- [Another Clock](https://dersenn.github.io/C4TA-p5/211025-clock-2/)
+- [Yet Another Clock - w.i.p](https://dersenn.github.io/C4TA-p5/211025-clock-4/)
+- [Some Clicky Grid](https://dersenn.github.io/C4TA-p5/211026-clickclass/)
