@@ -1,22 +1,15 @@
 class Node {
     constructor(posX, posY) {
-        this.pos = createVector(posX,posY)
+        this.pos = { x: posX, y: posY }
 
-        // something's not working right with this speed thing (not so important)
-        // hmm, the "radius" of the vector doesn't seem to be important for the speed...
-        let speedFactor = 100000
+        let speedFactor = 5
 
-        this.speedX = sin( ( random()*TAU ) * speedFactor )
-        this.speedY = cos( ( random()*TAU ) * speedFactor )
+        this.speedX = ( sin( random()*TAU ) ) * speedFactor
+        this.speedY = ( cos( random()*TAU ) ) * speedFactor
         this.speed = createVector( this.speedX, this.speedY )
 
         this.dia = random(10,100)
         this.r = this.dia / 2
-    }
-
-    updatePos() {
-        this.pos.x += this.speed.x
-        this.pos.y += this.speed.y
     }
 
     checkPos() {
@@ -28,9 +21,20 @@ class Node {
         }
     }
 
+    updatePos() {
+        this.pos.x += this.speed.x
+        this.pos.y += this.speed.y
+    }
+
     drawNode() {
         fill(0)
         ellipse(this.pos.x, this.pos.y, this.dia)
+        // draw the speed vector
+        push()
+        stroke(0, 255, 0)
+        line(this.pos.x, this.pos.y, this.pos.x + this.speed.x, this.pos.y + this.speed.y)
+        pop()
+
         this.checkPos()
         this.updatePos()
     }

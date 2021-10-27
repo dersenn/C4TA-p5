@@ -14,6 +14,7 @@ let nodes = []
 
 function createNode() {
     nodes.push( new Node( mouseX, mouseY ) )
+    console.log(nodes[nodes.length-1])
 }
 
 // p5 Setup
