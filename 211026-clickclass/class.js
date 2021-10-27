@@ -2,14 +2,16 @@ class Node {
     constructor(posX, posY) {
         this.pos = { x: posX, y: posY }
 
-        let speedFactor = 5
-
-        this.speedX = ( sin( random()*TAU ) ) * speedFactor
-        this.speedY = ( cos( random()*TAU ) ) * speedFactor
-        this.speed = createVector( this.speedX, this.speedY )
-
-        this.dia = random(10,100)
+        this.dia = random(10, 100)
         this.r = this.dia / 2
+
+        this.direction = random() * TAU
+        this.speedFactor = random(1,7)
+
+        this.speed = createVector( 
+            sin(this.direction) * this.speedFactor,
+            cos(this.direction) * this.speedFactor
+            )
     }
 
     checkPos() {
@@ -26,20 +28,29 @@ class Node {
         this.pos.y += this.speed.y
     }
 
-    drawNode() {
+    drawNode(n, nodesarr) {
+        this.index = n
+        this.nodes = nodesarr
+
         fill(0)
         ellipse(this.pos.x, this.pos.y, this.dia)
-        // draw the speed vector
-        push()
-        stroke(0, 255, 0)
-        line(this.pos.x, this.pos.y, this.pos.x + this.speed.x, this.pos.y + this.speed.y)
-        pop()
 
         this.checkPos()
         this.updatePos()
+        this.drawNet()
+        this.drawSpeedVec(10)
     }
 
-    drawNet(nodes) {
+    drawSpeedVec(factor) {
+        // draw the speed vector
+        push()
+        stroke(0, 255, 0)
+        line(this.pos.x, this.pos.y, this.pos.x + this.speed.x * factor, this.pos.y + this.speed.y * factor)
+        pop()
+        // console.log(mag(this.speed))
+    }
+
+    drawNet() {
         line(this.pos.x, this.pos.y, 0, 0)
         line(this.pos.x, this.pos.y, 0, height)
         line(this.pos.x, this.pos.y, width, height)

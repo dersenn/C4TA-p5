@@ -9,8 +9,8 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 
+// The Nodes Array
 let nodes = []
-
 
 function createNode() {
     nodes.push( new Node( mouseX, mouseY ) )
@@ -19,11 +19,17 @@ function createNode() {
 
 // p5 Setup
 function setup() {
-    //initial setup of canvas and container
+    // initial setup of canvas and container
     canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    //actual code starts here
+    // create some nodes to start with (for development)
+    // some nodes get stuck at edges (okay for now)
+    for (let i = 0; i < 5; i++) {
+        nodes.push( new Node( random() * width, random() * height ) )
+    }
+
+    // add nodes on click
     canvas.mouseClicked(createNode)
 }
 
@@ -32,8 +38,6 @@ function draw() {
     background(255)
     for (let n = 0; n < nodes.length; n++) {
         let node = nodes[n]
-        node.drawNode()
-        node.drawNet(nodes)
+        node.drawNode(n, nodes)
     }
-    // console.log(nodes)
 }
