@@ -2,7 +2,7 @@ class Node {
     constructor(posX, posY) {
         this.pos = { x: posX, y: posY }
 
-        this.dia = random(10, 100)
+        this.dia = 10 //random(10, 100)
         this.r = this.dia / 2
 
         this.direction = random() * TAU
@@ -32,35 +32,42 @@ class Node {
         this.index = n
         this.nodes = nodesarr
 
-        fill(0)
-        ellipse(this.pos.x, this.pos.y, this.dia)
-
+        this.drawNet()
+        // this.drawPoint()
+        // this.drawSpeedVec(10)
         this.checkPos()
         this.updatePos()
-        this.drawNet()
-        this.drawSpeedVec(10)
+    }
+
+    drawPoint() {
+        fill(0)
+        ellipse(this.pos.x, this.pos.y, this.dia)
     }
 
     drawSpeedVec(factor) {
-        // draw the speed vector
+        // draw the speed vector multiplied by factor (for visibility's sake)
         push()
         stroke(0, 255, 0)
         line(this.pos.x, this.pos.y, this.pos.x + this.speed.x * factor, this.pos.y + this.speed.y * factor)
         pop()
-        // console.log(mag(this.speed))
     }
 
     drawNet() {
-        line(this.pos.x, this.pos.y, 0, 0)
-        line(this.pos.x, this.pos.y, 0, height)
-        line(this.pos.x, this.pos.y, width, height)
-        line(this.pos.x, this.pos.y, width, 0)
+        // somewhat working grid.
+        // then: get it to draw all connections (for ...), but without doubles. ---> collision detection stuff.
 
+        // for (let i = 0; i < this.nodes.length; i++) {
+            let i = this.index
+            let last = this.nodes[this.nodes.length - 1]
+            if ( i > 0 && i < this.nodes.length) {
+                let prev = this.nodes[i-1]
+                let prevX = prev.pos.x - prev.speed.x // account for speed change from this to previous...
+                let prevY = prev.pos.y - prev.speed.y // account for speed change from this to previous...
 
-        // grid between nodes not working (maybe check some collision detection stuff)
-        // this.other = nodes
-        // for (let i = 0; i < this.other.length; i++) {
-        //     line(this.x, this.y, this.other.x, this.other.y)
+                line(this.pos.x, this.pos.y, prevX, prevY)
+            } else {
+                line(this.pos.x, this.pos.y, last.pos.x, last.pos.y)
+            }
         // }
     }
 }

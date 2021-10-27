@@ -24,8 +24,8 @@ function setup() {
     canvas.parent(container)
 
     // create some nodes to start with (for development)
-    // some nodes get stuck at edges (okay for now)
-    for (let i = 0; i < 5; i++) {
+    // some nodes may get stuck at edges (okay for now)
+    for (let i = 0; i < 3; i++) {
         nodes.push( new Node( random() * width, random() * height ) )
     }
 
