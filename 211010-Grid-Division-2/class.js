@@ -27,7 +27,7 @@ class Tile {
         rect(this.cX,this.cY,this.w,this.h)
 
         push()
-        translate(this.w/2,this.h/2)
+        translate(this.x + this.w/2, this.y + this.h/2)
 
         rect(0,0,this.w,this.h)
 
@@ -44,8 +44,3 @@ class Tile {
 
     }
 }
-
-// use like so (in main app)
-// let v = new Xyz(something)
-// v.classFunction()
-
