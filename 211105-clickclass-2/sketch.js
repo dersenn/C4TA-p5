@@ -1,3 +1,6 @@
+// next: create multilple shapes...
+
+
 const container = document.getElementById('p5-container')
 // make sure there is a #p5-container in index.html.
 
