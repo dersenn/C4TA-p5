@@ -44,5 +44,3 @@ function draw() {
     // }
     poly.drawStructure()
 }
-
-// -2 interesting middlestage
