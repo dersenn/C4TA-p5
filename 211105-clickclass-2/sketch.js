@@ -25,7 +25,7 @@ function setup() {
     canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    for (let i = 0; i < random(3,36); i++) {
+    for (let i = 0; i < random(3,39); i++) {
         nodes.push( new Node( random() * width, random() * height ) )
     }
 
