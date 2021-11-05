@@ -7,9 +7,12 @@ class Structure {
     // make polygon here.
         beginShape()
         for (let n = 0; n < this.nodes.length; n++) {
+            noStroke()
+            fill(0,255,0)
             let node = this.nodes[n]
             vertex(node.pos.x, node.pos.y)
-            // node.vertex(node.pos.x, node.pos.y)
+            node.checkPos()
+            node.updatePos()
         }
         endShape()
 
