@@ -16,3 +16,4 @@
 - [Another Clock](https://dersenn.github.io/C4TA-p5/211025-clock-2/)
 - [Yet Another Clock - w.i.p](https://dersenn.github.io/C4TA-p5/211025-clock-4/)
 - [Some Clicky Grid](https://dersenn.github.io/C4TA-p5/211026-clickclass/)
+- [Clicky Grid now with polygons!](https://dersenn.github.io/C4TA-p5/211105-clickclass-2/)
