@@ -8,6 +8,8 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
+let poly
+
 
 // The Nodes Array
 let nodes = []
@@ -23,11 +25,11 @@ function setup() {
     canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    // create some nodes to start with (for development)
-    // some nodes may get stuck at edges (okay for now)
     for (let i = 0; i < 3; i++) {
         nodes.push( new Node( random() * width, random() * height ) )
     }
+
+    poly = new Structure( nodes )
 
     // add nodes on click
     canvas.mouseClicked(createNode)
@@ -36,8 +38,11 @@ function setup() {
 // p5 Draw
 function draw() {
     background(0)
-    for (let n = 0; n < nodes.length; n++) {
-        let node = nodes[n]
-        node.drawNode(n, nodes)
-    }
+    // for (let n = 0; n < nodes.length; n++) {
+    //     let node = nodes[n]
+    //     node.drawNode(n, nodes)
+    // }
+    poly.drawStructure()
 }
+
+// -2 interesting middlestage

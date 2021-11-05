@@ -1,5 +1,21 @@
 class Structure {
+    constructor(nodes) {
+        this.nodes = nodes
+    }
+
+    drawStructure() {
     // make polygon here.
+        beginShape()
+        for (let n = 0; n < this.nodes.length; n++) {
+            let node = this.nodes[n]
+            vertex(node.pos.x, node.pos.y)
+            // node.vertex(node.pos.x, node.pos.y)
+        }
+        endShape()
+
+    }
+
+
 }
 
 
@@ -61,7 +77,8 @@ class Node {
         // somewhat working grid.
         // then: get it to draw all connections (for ...), but without doubles. ---> collision detection stuff.
 
-        // for (let i = 0; i < this.nodes.length; i++) {
+        for (let i = 0; i < this.nodes.length; i++) {
+            stroke(0,255,0)
             let i = this.index
             let last = this.nodes[this.nodes.length - 1]
             if ( i > 0 && i < this.nodes.length) {
@@ -73,6 +90,6 @@ class Node {
             } else {
                 line(this.pos.x, this.pos.y, last.pos.x, last.pos.y)
             }
-        // }
+        }
     }
 }
