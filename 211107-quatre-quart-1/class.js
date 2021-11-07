@@ -39,22 +39,45 @@ class Tile {
     constructor(zeroX, zeroY, w, h) {
         this.pos = {x: zeroX, y: zeroY}
         this.dim = {w: w, h: h}
+
+        this.angles = [QUARTER_PI, HALF_PI, PI]
+        this.a = random(this.angles)
+
     }
 
     drawTile(length) {
-        push()
-        translate(this.dim.w/2, this.dim.h/2)
-        rotate(random(PI))
+        this.sine = sin(this.a)
+        this.cosine = cos(this.a)
 
         this.r = this.dim.w * length
 
 
+        push()
+        translate(this.dim.w/2, this.dim.h/2)
+
+    // let sinX = map(sine,-1,1,-width/2 + r,width/2 - r)
+    // let cosX = map(cosine,-1,1,-width/2 + r,width/2 - r)
+    // let sinY = map(sine,-1,1,-height/2 + r,height/2 - r)
+    // let cosY = map(cosine,-1,1,-height/2 + r,height/2 - r)
+
+
+        this.A = {
+            x: map(this.sine, -1, 1, 0, this.pos.x + this.r),
+            y: map(this.cosine, -1, 1, 0, this.pos.y + this.r)
+        }
+
+        stroke(255,0,0)
+        line(this.pos.x, this.pos.y, this.A.x, this.A.y)
+
+        // stroke(0,255,0)
+        // line(this.pos.x - this.r, this.pos.y, this.pos.x + this.r, this.pos.y)
+
+        noFill()
         stroke(0)
         ellipse(this.pos.x, this.pos.y, this.dim.w * length, this.dim.h)
 
-        stroke(0,255,0)
-        line(this.pos.x - this.r, this.pos.y, this.pos.x + this.r, this.pos.y)
-
         pop()
+
+        this.a += TAU/3
     }
 }
