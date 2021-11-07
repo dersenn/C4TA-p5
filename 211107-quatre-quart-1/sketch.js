@@ -11,18 +11,21 @@ let maingrid
 
 // p5 Setup
 function setup() {
-    //initial setup of canvas and container
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    maingrid = new Grid(0, 0, width, height, 2, 2, 9, 9)
+    maingrid = new Grid(0, 0, width, height, 2, 2, 3, 3)
     maingrid.makeGrid()
-    console.log(maingrid.tiles)
+    console.log(maingrid)
 }
 
 // p5 Draw
 function draw() {
-    for (let tile of maingrid.tiles) {
-        tile.drawTile()
+    let length = .25
+    for (let maintile of maingrid.tiles) {
+        for (let tile of maintile) {
+            tile.drawTile(length)
+        }
+    length += .25
     }
 }
