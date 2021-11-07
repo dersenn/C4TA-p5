@@ -10,7 +10,7 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 
-let gridCols = 3
+let gridCols = 5
 let gridRows = gridCols
 
 let tileW = canMin / gridCols
@@ -50,11 +50,13 @@ function setup() {
         let xOff = 0 + (x * tileW)
             for (let y = 0; y < gridRows; y++) {
                 let yOff
+                    // yOff = 0 + (y * tileH)
+                    // myTiles.push( new Tile(xOff, yOff, tileW, tileH, color))
                 if (x % 2 == 0) {
                     yOff = 0 + (y * tileH)
                     myTiles.push( new Tile(xOff, yOff, tileW, tileH, color))
                 } else {
-                    yOff = height - (y * tileH)
+                    yOff = (height - tileH) - (y * tileH)
                     myTiles.push( new Tile(xOff, yOff, tileW, tileH, color))
                 }
                 color += cInc
