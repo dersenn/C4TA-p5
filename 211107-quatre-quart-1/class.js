@@ -46,35 +46,17 @@ class Tile {
     }
 
     drawTile(length) {
-        this.sine = sin(this.a)
-        this.cosine = cos(this.a)
-
-        this.r = this.dim.w * length
-
-
+        this.r = this.dim.w / 2
         push()
-        translate(this.dim.w/2, this.dim.h/2)
-
-    // let sinX = map(sine,-1,1,-width/2 + r,width/2 - r)
-    // let cosX = map(cosine,-1,1,-width/2 + r,width/2 - r)
-    // let sinY = map(sine,-1,1,-height/2 + r,height/2 - r)
-    // let cosY = map(cosine,-1,1,-height/2 + r,height/2 - r)
-
-
-        this.A = {
-            x: map(this.sine, -1, 1, 0, this.pos.x + this.r),
-            y: map(this.cosine, -1, 1, 0, this.pos.y + this.r)
-        }
-
-        stroke(255,0,0)
-        line(this.pos.x, this.pos.y, this.A.x, this.A.y)
-
-        // stroke(0,255,0)
-        // line(this.pos.x - this.r, this.pos.y, this.pos.x + this.r, this.pos.y)
+        translate(this.pos.x + this.r, this.pos.y + this.r)
+        rotate(this.a)
 
         noFill()
         stroke(0)
-        ellipse(this.pos.x, this.pos.y, this.dim.w * length, this.dim.h)
+        ellipse(0, 0, this.dim.w * length, this.dim.h)
+
+        stroke(0, 255, 0)
+        line(0, 0, this.r, this.r)
 
         pop()
 
