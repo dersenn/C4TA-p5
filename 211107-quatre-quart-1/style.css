@@ -10,8 +10,8 @@ body {
 }
 
 #p5-container {
-    margin: 5vmin;
-    width: 90vmin;
-    height: 90vmin;
+    margin: 0vmin;
+    width: 100vmin;
+    height: 100vmin;
     background: transparent;
 }

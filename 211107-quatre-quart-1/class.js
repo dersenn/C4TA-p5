@@ -41,25 +41,23 @@ class Tile {
         this.dim = {w: w, h: h}
 
         this.angles = [QUARTER_PI, HALF_PI, PI]
-        this.a = random(this.angles)
+        this.a = random(TAU)
 
     }
 
-    drawTile(length) {
-        this.r = this.dim.w / 2
+    drawTile(length, color) {
+        this.r = this.dim.w / 2 * length
         push()
         translate(this.pos.x + this.r, this.pos.y + this.r)
         rotate(this.a)
 
-        noFill()
-        stroke(0)
-        ellipse(0, 0, this.dim.w * length, this.dim.h)
-
-        stroke(0, 255, 0)
-        line(0, 0, this.r, this.r)
+        stroke(0, color, 0)
+        strokeCap(ROUND)
+        strokeWeight(3)
+        line(-this.r, -this.r, this.r, this.r)
 
         pop()
 
-        this.a += TAU/3
+        this.a += PI/60
     }
 }
