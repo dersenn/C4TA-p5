@@ -17,6 +17,14 @@ class Grid {
             this.colOff = this.pos.x + (col * this.tileW)
 
                 for (let row = 0; row < this.rows; row++) {
+
+                    // ATTEMPT TO MAKE IT ZIGZAG (as in molnar's example)
+                    // if (row % 2 == 0) {
+                    //     this.rowOff = this.pos.y + (row * this.tileH)
+                    // } else {
+                    //     this.rowOff = (this.dim.h) - (row * this.tileH)
+                    // }
+
                     this.rowOff = this.pos.y + (row * this.tileH)
 
                     if (this.sCols > 0 || this.sRows > 0) {
@@ -25,6 +33,8 @@ class Grid {
                     } else {
                         this.tiles.push( new Tile(this.colOff, this.rowOff, this.tileW, this.tileH) )
                     }
+
+
 
                 }
 
