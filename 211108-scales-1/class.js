@@ -1,11 +1,9 @@
 class Grid {
-    constructor(zeroX, zeroY, w, h, cols, rows, subcols, subrows) {
+    constructor(zeroX, zeroY, w, h, cols, rows) {
         this.pos = {x: zeroX, y: zeroY}
         this.dim = {w: w, h: h}
         this.cols = cols
         this.rows = rows
-        this.sCols = subcols
-        this.sRows = subrows
 
         this.tileW = this.dim.w / this.cols
         this.tileH = this.dim.h / this.rows
@@ -27,28 +25,61 @@ class Grid {
         }
 }
 
-
 class Tile {
     constructor(zeroX, zeroY, w, h) {
         this.init = {x: zeroX, y: zeroY}
         this.dim = {w: w, h: h}
+        this.center = {x: this.init.x + this.dim.w/2, y: this.init.y + this.dim.h/2}
 
-        this.angles = [QUARTER_PI, HALF_PI, PI]
-        this.a = 0
+        this.pos = this.init
+        this.a = random(radians(-30), radians(30))
 
+        // this.speed = 1
     }
 
     drawTile() {
+        rectMode(CENTER)
+        noFill()
+        stroke(0, 255, 0)
+        rect(this.center.x, this.center.y, this.dim.w, this.dim.h)
 
-        let sine = sin(this.a) + 1
-        this.pos = {
-            x: map(sine, -1, 1, this.init.x, this.init.x + this.dim.w),
-            y: this.init.y + this.dim.h/2
+        fill(0)
+        noStroke()
+
+        let sine = sin(this.a)
+
+        // mousedist
+        this.mDist = dist(mouseX, mouseY, this.center.x, this.center.y)
+
+        if (this.mDist <= this.dim.w*2) {
+            this.speed = map(this.mDist, 0, this.dim.w*2, 0, .7)
+        } else {
+            this.speed = .7
         }
 
-        ellipse(this.pos.x, this.pos.y, 10)
+        console.log(this.speed)
+        // console.log(this.mDist)
 
-        this.a += TAU/60
+        // left bowl
+        this.leftY = map(sine, -1, 1, this.center.y + this.dim.h/3, this.center.y - this.dim.h/3)
+        arc(this.init.x + this.dim.w/4, this.leftY, this.dim.w/3, this.dim.h/3, 0, PI)
+
+        // right bowl
+        this.rightY = map(sine, -1, 1, this.center.y - this.dim.h/3, this.center.y + this.dim.h/3)
+        arc(this.init.x + 3*(this.dim.w/4), this.rightY, this.dim.w/3, this.dim.h/3, 0, PI)
+
+        // stem
+        rect(this.center.x, this.center.y, this.dim.w/10, this.dim.h*.75)
+
+        // bar
+        let rotation = map(sine, -1, 1, radians(-30), radians(30))
+        push()
+        translate(this.center.x, this.init.y + this.dim.h/10)
+        rotate(rotation)
+        rect(0, 0, this.dim.w*.75, this.dim.h/10)
+        pop()
+
+        this.a += ( TAU/120 ) * this.speed
 
     }
 }
