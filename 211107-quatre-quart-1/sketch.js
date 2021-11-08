@@ -17,7 +17,7 @@ function setup() {
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    maingrid = new Grid(margin/2, margin/2, width - margin, height - margin, 3, 3, 12, 12)
+    maingrid = new Grid(margin/2, margin/2, width - margin, height - margin, 2, 2, 12, 12)
     maingrid.makeGrid()
     // console.log(maingrid)
 }
