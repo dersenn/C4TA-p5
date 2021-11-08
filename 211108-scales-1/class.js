@@ -48,6 +48,8 @@ class Tile {
 
         let sine = sin(this.a)
 
+        // NOTE TO SELF: EVER HEARD ABOUT METHODS?
+
         // mousedist
         this.mDist = dist(mouseX, mouseY, this.center.x, this.center.y)
 
@@ -57,7 +59,7 @@ class Tile {
             this.speed = .7
         }
 
-        console.log(this.speed)
+        // console.log(this.speed)
         // console.log(this.mDist)
 
         // left bowl
