@@ -34,8 +34,6 @@ class Grid {
                         this.tiles.push( new Tile(this.colOff, this.rowOff, this.tileW, this.tileH) )
                     }
 
-
-
                 }
 
         }
