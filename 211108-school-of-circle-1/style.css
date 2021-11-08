@@ -10,7 +10,7 @@ body {
 }
 
 #p5-container {
-    position: absolute;
+    margin: 0vmin;
     width: 100vmin;
     height: 100vmin;
     background: transparent;
