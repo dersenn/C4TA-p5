@@ -17,14 +17,6 @@ class Grid {
             this.colOff = this.pos.x + (col * this.tileW)
 
                 for (let row = 0; row < this.rows; row++) {
-
-                    // ATTEMPT TO MAKE IT ZIGZAG (as in molnar's example)
-                    // if (row % 2 == 0) {
-                    //     this.rowOff = this.pos.y + (row * this.tileH)
-                    // } else {
-                    //     this.rowOff = (this.dim.h) - (row * this.tileH)
-                    // }
-
                     this.rowOff = this.pos.y + (row * this.tileH)
 
                     if (this.sCols > 0 || this.sRows > 0) {
@@ -42,30 +34,65 @@ class Grid {
         }
 }
 
+class Curve {
+    constructor(zero, center, bend) {
+
+    }
+}
+
 
 class Tile {
     constructor(zeroX, zeroY, w, h) {
         this.pos = {x: zeroX, y: zeroY}
         this.dim = {w: w, h: h}
+        this.c = {x: this.pos.x + this.dim.w/2, y: this.pos.y + this.dim.h/2}
 
-        this.angles = [QUARTER_PI, HALF_PI, PI]
         this.a = random(TAU)
 
+        // for auto generation
+        this.nCurves = 4
+        this.curves = []
     }
 
-    drawTile(length, color) {
-        this.r = this.dim.w / 2 * length
-        push()
-        translate(this.pos.x + this.r, this.pos.y + this.r)
-        rotate(this.a)
+    drawTile(color) {
+        this.col = color
 
-        stroke(0, color, 0)
-        strokeCap(ROUND)
+        noFill()
+        stroke(0,this.col,0)
         strokeWeight(3)
-        line(-this.r, -this.r, this.r, this.r)
+        // rect(this.pos.x, this.pos.y, this.dim.w, this.dim.h)
 
-        pop()
+        let sine = sin(this.a)
 
-        this.a += PI/60
+        this.bend = map(sine, -1, 1, this.dim.w/8, this.dim.w/3)
+        // this.bend = this.dim.w/3 // Can be used to animate wobble later (maybe)
+
+        bezier( this.pos.x, this.pos.y, 
+                this.pos.x, this.pos.y + this.bend, 
+                this.c.x - this.bend, this.c.y, 
+                this.c.x, this.c.y )
+
+        bezier( this.pos.x, this.pos.y + this.dim.h, 
+                this.pos.x + this.bend, this.pos.y + this.dim.h, 
+                this.c.x, this.c.y + this.bend, 
+                this.c.x, this.c.y )
+
+        bezier( this.pos.x + this.dim.w, this.pos.y + this.dim.h, 
+                this.pos.x + this.dim.w, this.pos.y + this.dim.h - this.bend, 
+                this.c.x + this.bend, this.c.y, 
+                this.c.x, this.c.y )
+
+        bezier( this.pos.x + this.dim.w, this.pos.y, 
+                this.pos.x + this.dim.w - this.bend, this.pos.y, 
+                this.c.x, this.c.y - this.bend, 
+                this.c.x, this.c.y )
+
+
+        stroke(255,0,0)
+        strokeWeight(3)
+        // point(this.c.x, this.c.y)
+
+        this.a += TAU/180
+
     }
 }

@@ -17,7 +17,7 @@ function setup() {
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
-    maingrid = new Grid(margin/2, margin/2, width - margin, height - margin, 3, 3, 12, 12)
+    maingrid = new Grid(margin/2, margin/2, width - margin, height - margin, 3, 3, 3, 3)
     maingrid.makeGrid()
     // console.log(maingrid)
 }
@@ -29,7 +29,7 @@ function draw() {
     let color = 255
     for (let maintile of maingrid.tiles) {
         for (let tile of maintile) {
-            tile.drawTile(length, color)
+            tile.drawTile(color)
         }
     length += .25
     color -= 255 / maingrid.tiles.length + 1
