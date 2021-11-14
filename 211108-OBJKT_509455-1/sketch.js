@@ -42,7 +42,6 @@ function draw() {
     point( cos(radians(60)) * cr, sin(radians(60)) * cr )
     point( cos(radians(300)) * cr, sin(radians(300)) * cr )
 
-
     stroke(0,0,255)
     point( cos(radians(120)) * cr, sin(radians(120)) * cr )
     point( cos(radians(240)) * cr, sin(radians(240)) * cr )
@@ -52,7 +51,11 @@ function draw() {
     point( cos(radians(180)) * cr, sin(radians(180)) * cr )
 
     strokeWeight(1)
+
+    line(cos(radians(0)) * cr, sin(radians(0)) * cr, cos(radians(180)) * cr, sin(radians(180)) * cr)
     
     line(cos(radians(300)) * cr, sin(radians(300)) * cr, cos(radians(120)) * cr, sin(radians(120)) * cr)
+
+    line(cos(radians(60)) * cr, sin(radians(60)) * cr, cos(radians(240)) * cr, sin(radians(240)) * cr)
 
 }
