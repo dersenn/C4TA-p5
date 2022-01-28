@@ -6,12 +6,14 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
 // "Global" vars
-let nRows = 3
+let nRows = 6
 let nCols = nRows
 let boxW = canMin / nRows
 let boxH = canMin / nCols
 
+
 let zero
+let amp = .01
 
 
 // p5 Setup
@@ -19,15 +21,6 @@ function setup() {
   let canvas = createCanvas(canW,canH,WEBGL)
   canvas.parent(container)
   // the bull starts here
-}
-
-// p5 Draw
-function draw() {
-  background(0)
-  orbitControl()
-  // noFill()
-  // stroke(0,255,0)
-  noStroke()
 
   zero = {
     x: -(width/2) + boxW/2,
@@ -36,14 +29,24 @@ function draw() {
   }
 
 
-  pointLight(255, 0, 0, zero.x, zero.y, 0)
+}
+
+// p5 Draw
+function draw() {
+  background(0)
+  orbitControl()
+  noFill()
+  stroke(0,255,0)
+  // noStroke()
 
   for (let x = 0; x < nRows; x++) {
     for (let y = 0; y < nCols; y++) {
+
+      let n = noise(frameCount * (x+1) * amp, frameCount * (y+1) * amp)
+
       push()
-      let n = noise(frameCount * .1)
       translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * (n*(x+1)*(y+1)))
-      ambientMaterial(255,0,0)
+      // ambientMaterial(255,255,0)
       box(boxW)
       pop()
     }
