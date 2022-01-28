@@ -25,7 +25,7 @@ function setup() {
 function draw() {
   background(0)
   orbitControl()
-  noFill()
+  // noFill()
   stroke(0,255,0)
 
   zero = {
@@ -34,10 +34,15 @@ function draw() {
     z: -(width/2) + boxW/2
   }
 
+
+  pointLight(255, 0, 0, zero.x, zero.y, 0)
+
   for (let x = 0; x < nRows; x++) {
     for (let y = 0; y < nCols; y++) {
       push()
-      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * random())
+      let n = noise(frameCount * .1)
+      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * (n*x*y))
+      ambientMaterial(255,0,0)
       box(boxW)
       pop()
     }
