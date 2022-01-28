@@ -1,3 +1,5 @@
+// https://www.hicetnunc.xyz/objkt/509455
+
 const container = document.getElementById('p5-container')
 // make sure there is a #p5-container in index.html.
 
@@ -47,15 +49,5 @@ function draw() {
     point( cos(radians(240)) * cr, sin(radians(240)) * cr )
 
     stroke(255)
-    point( cos(radians(0)) * cr, sin(radians(0)) * cr )
-    point( cos(radians(180)) * cr, sin(radians(180)) * cr )
-
-    strokeWeight(1)
-
-    line(cos(radians(0)) * cr, sin(radians(0)) * cr, cos(radians(180)) * cr, sin(radians(180)) * cr)
-    
-    line(cos(radians(300)) * cr, sin(radians(300)) * cr, cos(radians(120)) * cr, sin(radians(120)) * cr)
-
-    line(cos(radians(60)) * cr, sin(radians(60)) * cr, cos(radians(240)) * cr, sin(radians(240)) * cr)
 
 }
