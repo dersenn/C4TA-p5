@@ -41,7 +41,7 @@ function draw() {
     for (let y = 0; y < nCols; y++) {
       push()
       let n = noise(frameCount * .1)
-      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * (n*x*y))
+      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * (n*(x+1)*(y+1)))
       ambientMaterial(255,0,0)
       box(boxW)
       pop()
