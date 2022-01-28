@@ -26,7 +26,8 @@ function draw() {
   background(0)
   orbitControl()
   // noFill()
-  stroke(0,255,0)
+  // stroke(0,255,0)
+  noStroke()
 
   zero = {
     x: -(width/2) + boxW/2,
