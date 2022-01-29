@@ -34,8 +34,8 @@ let amp
 let l1 = {}
 let l2 = {}
 
-let lightSpeed = .01
 
+let lightSpeed = .01
 let evo = .2
 
 // p5 Draw
@@ -48,16 +48,17 @@ function draw() {
   stroke(255)
   noStroke()
 
-  speed = frameCount / 750
+  speed = frameCount / 500
   // amp = random(1, width/2)
-  amp = width
+  amp = width * 1.5
+  off = 100
 
 
-  l1.x = -width
+  l1.x = map(cos(speed),-1,1,-width, width)
   l1.y = map(sin(frameCount) * lightSpeed,-1,1,-height, height)
 
-  l2.x = width
-  l2.y = map(cos(frameCount) * lightSpeed,-1,1,-height, height)
+  l2.x = map(sin(frameCount) * lightSpeed,-1,1,-width, width)
+  l2.y = map(cos(speed),-1,1,-height, height)
 
 
   pointLight(0, 255, 0, l1.x, l1.y, 0)
