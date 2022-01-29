@@ -11,10 +11,7 @@ let nCols = nRows
 let boxW = canMin / nRows
 let boxH = canMin / nCols
 
-
 let zero
-let amp = .01
-
 
 // p5 Setup
 function setup() {
@@ -27,27 +24,35 @@ function setup() {
     y: -(height/2) + boxH/2,
     z: -(width/2) + boxW/2
   }
-
-
 }
+
+// animation vars
+let n
+let speed
+let amp
 
 // p5 Draw
 function draw() {
   background(0)
   orbitControl()
-  noFill()
+  // noFill()
   stroke(0,255,0)
-  // noStroke()
+  noStroke()
+
+  speed = frameCount / 500
+  amp = width/3
+
+  pointLight(0, 255, 0, zero.x-width, zero.y-height, width)
 
   for (let x = 0; x < nRows; x++) {
     for (let y = 0; y < nCols; y++) {
 
-      let n = noise(frameCount * (x+1) * amp, frameCount * (y+1) * amp)
+      n = noise((x+1) * speed, (y+1) * speed) * amp
 
       push()
-      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z * (n*(x+1)*(y+1)))
-      // ambientMaterial(255,255,0)
-      box(boxW)
+      translate(zero.x + x*boxW, zero.y + y*boxH, zero.z + n)
+      ambientMaterial(0,255,0)
+      sphere(boxW)
       pop()
     }
   }
