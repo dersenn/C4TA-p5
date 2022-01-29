@@ -48,7 +48,7 @@ function draw() {
   stroke(255)
   noStroke()
 
-  speed = frameCount / 500
+  speed = frameCount / 750
   // amp = random(1, width/2)
   amp = width * 1.5
   off = 100
