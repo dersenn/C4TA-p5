@@ -35,7 +35,7 @@ let l1 = {}
 let l2 = {}
 
 
-let lightSpeed = .01
+let lightSpeed = .02
 let evo = .2
 
 // p5 Draw
