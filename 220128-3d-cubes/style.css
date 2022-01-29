@@ -7,11 +7,12 @@
 body {
     width: 100vw;
     height: 100vh;
+    background: #000;
 }
 
 #p5-container {
-    margin: 0vmin;
+    margin: 0;
     width: 100vmin;
     height: 100vmin;
-    background: transparent;
+    background: #000;
 }

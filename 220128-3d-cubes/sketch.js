@@ -43,7 +43,7 @@ function draw() {
 
   // ortho()
   background(0)
-  orbitControl()
+  // orbitControl()
   // noFill()
   stroke(255)
   noStroke()
