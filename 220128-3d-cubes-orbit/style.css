@@ -1,0 +1,18 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+}
+
+#p5-container {
+    margin: 0;
+    width: 100vmin;
+    height: 100vmin;
+    background: #000;
+}
