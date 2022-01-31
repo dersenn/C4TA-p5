@@ -1,10 +1,10 @@
 /*
 Convert this (https://dersenn.github.io/C4TA-svg/211121-make-some-noise/3_dandelion.html) into 3d space.
 
-Points on a sphere example (p5):
-https://editor.p5js.org/black/sketches/Sk3w2V6YM
-Distribution (Processing):
+Points on a sphere Distribution adapted from this (Processing):
 https://openprocessing.org/sketch/69005/
+Theory:
+http://mathworld.wolfram.com/SpherePointPicking.html
 */
 
 
@@ -18,11 +18,10 @@ let landscape = false
 if (canW > canH) landscape = true
 
 // "Global" vars
-let randomPoints = 50
-let rotX, rotY = 0
+let randomPoints = 100
 
 let center
-let sphereSize = canW / 3
+let sphereRadius = canW / 2.5
 
 // p5 Setup
 function setup() {
@@ -32,28 +31,38 @@ function setup() {
   center = createVector(0,0,0)
   stroke(0,0,255)
   strokeWeight(5)
-  rsp = new randomSpherePoints(randomPoints, sphereSize, center)
+  rsp = new randomSpherePoints(randomPoints, sphereRadius, center)
 
-  console.log(rsp)
+  // v1 = createVector(0,0,0)
+  // v2 = createVector(100,100,100)
+  // let l = p5.Vector.lerp(v1,v2,.5)
+  // console.log(l)
 }
 
-
+// animation vars
+let rotX = .005
+let rotY = .005
 
 // p5 Draw
 function draw() {
   background(0)
   orbitControl()
+
+  pointLight(0,255,0,-canW/2, canW/2, canW/2)
+
+  push()
+  rotateX(frameCount * rotX)
+  rotateY(frameCount * rotY)
   rsp.draw()
-  // rotY += 0.002;
+  pop()
 
-
-  drawCenterPoint()
+  // drawCenterPoint()
 }
 
-
-
 function drawCenterPoint() {
+  push()
   stroke(255,0,0)
   strokeWeight(10)
   point(0,0,0)
+  pop()
 }
