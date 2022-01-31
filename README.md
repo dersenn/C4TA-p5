@@ -18,3 +18,8 @@
 - [Some Clicky Grid](https://dersenn.github.io/C4TA-p5/211026-clickclass/)
 - [Clicky Grid now with polygons!](https://dersenn.github.io/C4TA-p5/211105-clickclass-2/)
 - [Some Vera Molnar (quatre quart)](https://dersenn.github.io/C4TA-p5/211107-quatre-quart-1/)
+
+## 3d, p5 and WebGL
+- [Bubbly Wall](https://dersenn.github.io/C4TA-p5/220128-3d-bubbles/)
+- [Noisy Wall](https://dersenn.github.io/C4TA-p5/220128-3d-cubes/)
+- [Noisy Wall with camera](https://dersenn.github.io/C4TA-p5/220130-3d-cubes-orbit/)
