@@ -43,12 +43,23 @@ function setup() {
 let rotX = .005
 let rotY = .005
 
+let l1 = {}
+l1.dist = canW/2
+
 // p5 Draw
 function draw() {
   background(0)
   orbitControl()
 
-  pointLight(0,255,0,-canW/2, canW/2, canW/2)
+  l1.speed = frameCount / 250
+  l1.col = color(0,255,0)
+  l1.pos = {
+    x: sin(l1.speed) * l1.dist,
+    y: cos(l1.speed) * l1.dist,
+    z: sin(l1.speed) * l1.dist
+  }
+
+  pointLight(0,255,0,l1.pos.x, l1.pos.y, l1.pos.z)
 
   push()
   rotateX(frameCount * rotX)
