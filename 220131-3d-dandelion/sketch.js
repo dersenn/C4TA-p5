@@ -21,7 +21,7 @@ if (canW > canH) landscape = true
 let randomPoints = 100
 
 let center
-let sphereRadius = canW / 2.5
+let sphereRadius = canMin / 2.5
 
 // p5 Setup
 function setup() {
@@ -54,9 +54,12 @@ function draw() {
   l1.speed = frameCount / 250
   l1.col = color(0,255,0)
   l1.pos = {
-    x: sin(l1.speed) * l1.dist,
-    y: cos(l1.speed) * l1.dist,
-    z: sin(l1.speed) * l1.dist
+    x: 0,
+    y: 0,
+    z: 0
+    // x: sin(l1.speed) * l1.dist,
+    // y: cos(l1.speed) * l1.dist,
+    // z: sin(l1.speed) * l1.dist
   }
 
   pointLight(0,255,0,l1.pos.x, l1.pos.y, l1.pos.z)
@@ -73,7 +76,7 @@ function draw() {
 function drawCenterPoint() {
   push()
   stroke(255,0,0)
-  strokeWeight(10)
+  strokeWeight(50)
   point(0,0,0)
   pop()
 }

@@ -62,7 +62,7 @@ class randomSpherePoints {
         2 * (c*d - a*b) / k,
         (a*a + d*d - b*b - c*c) / k
         ),
-      size: random(5,20),
+      size: random(5,25),
       dist: k
     }
     return pt
