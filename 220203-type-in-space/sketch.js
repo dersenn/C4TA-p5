@@ -1,14 +1,19 @@
-/*
-Convert this (https://dersenn.github.io/C4TA-svg/211121-make-some-noise/3_dandelion.html) into 3d space.
-
-Points on a sphere Distribution adapted from this (Processing):
-https://openprocessing.org/sketch/69005/
-Theory:
-http://mathworld.wolfram.com/SpherePointPicking.html
+/* 
+CODING CHALLENGE:
+https://twitter.com/zachlieberman/status/1489113833419517953
+BLUEPRINT BY MIKE:
+0. Buchstabe am Punkt 0,0,0 erstellen 
+1. Buchstaben in Fragmente teilen
+2. Richtungsvektor definieren
+uuh, vor 3 noch den Buchstaben im Raum drehen so dass er iN richtung Richtungsvektor schaut
+3. Fragmente vom Nullpunkt aus in plus/minus Richtingsvektor bewegen
+4. Fragmente skalieren wegen Perspektive (alternativ orthogonal arbeiten weil einfacher)
+5. Kamersposition berechnen (auf Linie des Richtingsvektors in Richtung 0,0,0)
+6. Alles in einem Objekt speichern, mehrere Buchstabenobjekte machen
+7. Kamerabewegung animieren
 */
 
-
-// Canvas Vars
+// CANVAS VARS
 const container = document.getElementById('p5-container')
 let canW = container.offsetWidth //canvas Width
 let canH = container.offsetHeight //canvas Height
@@ -17,66 +22,85 @@ let canMin = Math.min(canW, canH) //shorter canvas side
 let landscape = false
 if (canW > canH) landscape = true
 
-// "Global" vars
-let randomPoints = 100
-
+// "GLOBAL" VARS
 let center
-let sphereRadius = canMin / 2.5
 
-// p5 Setup
+let font
+let fontSize = canW / 2
+let txt = 'C' // ['C','4', 'T', 'A']
+
+let cam
+
+// PRELOAD
+function preload() {
+  font = loadFont('assets/MunkenSans-Medium.otf')
+}
+
+// LETTER (this may become a class)
+let glyph = {}
+let ttpOpts = {
+  sampleFactor: .3,
+  simplifyThreshold: 0
+}
+let nChunks = 3
+let chunkSize
+let chunks = []
+
+// STYLE
+let colors
+
+
+///////////////////////////////////////////////////////// P5 SETUP
 function setup() {
   let canvas = createCanvas(canW,canH,WEBGL)
   canvas.parent(container)
 
   center = createVector(0,0,0)
-  stroke(0,0,255)
-  strokeWeight(5)
-  rsp = new randomSpherePoints(randomPoints, sphereRadius, center)
+  colors = [
+    color(255, 0, 0),
+    color(0, 255, 0),
+    color(0, 0, 255)
+  ]
 
-  // v1 = createVector(0,0,0)
-  // v2 = createVector(100,100,100)
-  // let l = p5.Vector.lerp(v1,v2,.5)
-  // console.log(l)
-}
+  glyph.bounds = font.textBounds(txt, 0, 0, fontSize)
+  glyph.points = font.textToPoints(txt, -glyph.bounds.w/2, glyph.bounds.h/2, fontSize, ttpOpts)
 
-// animation vars
-let rotX = .005
-let rotY = .005
-
-let l1 = {}
-l1.dist = canW/2
-
-// p5 Draw
-function draw() {
-  background(0)
-  orbitControl()
-
-  l1.speed = frameCount / 250
-  l1.col = color(0,255,0)
-  l1.pos = {
-    x: 0,
-    y: 0,
-    z: 0
-    // x: sin(l1.speed) * l1.dist,
-    // y: cos(l1.speed) * l1.dist,
-    // z: sin(l1.speed) * l1.dist
+  chunkSize = glyph.points.length / nChunks
+  for (let c = 0; c < glyph.points.length; c += chunkSize) {
+    chunks.push(glyph.points.slice(c, c + chunkSize))
   }
-
-  pointLight(0,255,0,l1.pos.x, l1.pos.y, l1.pos.z)
-
-  push()
-  rotateX(frameCount * rotX)
-  rotateY(frameCount * rotY)
-  rsp.draw()
-  pop()
-
-  // drawCenterPoint()
+  cam = createCamera()
 }
 
-function drawCenterPoint() {
-  push()
-  stroke(255,0,0)
-  strokeWeight(50)
-  point(0,0,0)
-  pop()
+// ANIMATION VARS
+
+
+///////////////////////////////////////////////////////// P5 DRAW
+function draw() {
+  orbitControl()
+  ortho()
+
+  background(255)
+
+  cam.dist = canW / 2
+  cam.speed = frameCount / 100
+  cam.x = cos(cam.speed) * cam.dist
+  cam.y = 0
+  cam.z = sin(cam.speed) * cam.dist
+
+  cam.lookAt(0,0,0)
+  cam.setPosition(cam.x, cam.y, cam.z)
+
+  strokeWeight(5)
+  noFill()
+
+  for (let i = 0; i < chunks.length; i++) {
+    stroke(colors[i])
+    beginShape()
+    for (let p = 0; p < chunks[i].length; p++) {
+      let pt = chunks[i][p]
+      vertex(pt.x, pt.y, i * 100)
+    }
+    endShape()
+  }
 }
