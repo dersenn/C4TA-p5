@@ -36,15 +36,12 @@ function preload() {
   font = loadFont('assets/MunkenSans-Medium.otf')
 }
 
-// LETTER (this may become a class)
+// LETTER (this should become a class "glyph")
 let glyph = {}
 let ttpOpts = {
   sampleFactor: .3,
   simplifyThreshold: 0
 }
-let nChunks = 3
-let chunkSize
-let chunks = []
 
 // STYLE
 let colors
@@ -65,9 +62,11 @@ function setup() {
   glyph.bounds = font.textBounds(txt, 0, 0, fontSize)
   glyph.points = font.textToPoints(txt, -glyph.bounds.w/2, glyph.bounds.h/2, fontSize, ttpOpts)
 
-  chunkSize = glyph.points.length / nChunks
-  for (let c = 0; c < glyph.points.length; c += chunkSize) {
-    chunks.push(glyph.points.slice(c, c + chunkSize))
+  glyph.nChunks = 3
+  glyph.chunkSize = glyph.points.length / glyph.nChunks
+  glyph.chunks = []
+  for (let c = 0; c < glyph.points.length; c += glyph.chunkSize) {
+    glyph.chunks.push(glyph.points.slice(c, c + glyph.chunkSize))
   }
   cam = createCamera()
 }
@@ -94,11 +93,11 @@ function draw() {
   strokeWeight(5)
   noFill()
 
-  for (let i = 0; i < chunks.length; i++) {
+  for (let i = 0; i < glyph.chunks.length; i++) {
     stroke(colors[i])
     beginShape()
-    for (let p = 0; p < chunks[i].length; p++) {
-      let pt = chunks[i][p]
+    for (let p = 0; p < glyph.chunks[i].length; p++) {
+      let pt = glyph.chunks[i][p]
       vertex(pt.x, pt.y, i * 100)
     }
     endShape()
